@@ -6,39 +6,39 @@
  * @see https://github.com/neemzy/jquery.tao.js
  * @see http://www.zaibatsu.fr
  *
- * @require jQuery >= 1.9.1 (untested with previous versions)
+ * @require jQuery >= 1.7.2 (untested with previous versions)
  */
 
 ;(function($)
 {
     $.fn.extend({
         tao: function(options) {
-            if (this.is(':not(form)')) {
-                return;
-            }
-
-            var $this = this,
-                params = $.extend({}, options);
-            
-            if ((params.url === undefined) && ($this.is('[action]'))) {
-                params.url = this.attr('action');
-            }
-
-            if ((params.type === undefined) && ($this.is('[method]'))) {
-                params.type = this.attr('method');
-            }
-
-            $this.on('submit', function(e) {
-                e.preventDefault();
-                params.data = {};
-
-                $this.find('input:not(:checkbox, :radio), input:checked, select, textarea').each(function() {
-                    var $that = $(this);
-                    params.data[$that.attr('name')] = $that.val();
+            if (this.is('form')) {
+                var $this = this,
+                    params = $.extend({}, options);
+                
+                if ((params.url === undefined) && ($this.is('[action]'))) {
+                    params.url = this.attr('action');
+                }
+    
+                if ((params.type === undefined) && ($this.is('[method]'))) {
+                    params.type = this.attr('method');
+                }
+    
+                $this.on('submit', function(e) {
+                    e.preventDefault();
+                    params.data = {};
+    
+                    $this.find('input:not(:checkbox, :radio), input:checked, select, textarea').each(function() {
+                        var $that = $(this);
+                        params.data[$that.attr('name')] = $that.val();
+                    });
+    
+                    $.ajax(params);
                 });
-
-                $.ajax(params);
-            });
+            }
+            
+            return this;
         }
     });
 })
