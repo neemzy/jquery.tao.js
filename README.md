@@ -3,7 +3,7 @@ jquery.tao.js - Form AJAXizer
 
 ## About
 
-Tao is your new best friend. With his zen attitude and his grand master skills, he will help you turn old-fashioned forms to AJAX beauties in a second.
+__Tao__ is your new best friend. With his zen attitude and his grand master skills, he will help you turn old-fashioned forms to AJAX beauties in a second.
 
 Consider the following form :
 
