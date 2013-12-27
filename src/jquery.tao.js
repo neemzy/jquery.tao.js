@@ -2,14 +2,12 @@
  * Tao - jquery.tao.js
  * Form AJAXizer
  *
- * @author Tom Panier <tom.panier@free.fr>
+ * @author neemzy <tom.panier@free.fr>
  * @see https://github.com/neemzy/jquery.tao.js
  * @see http://www.zaibatsu.fr
- *
- * @require jQuery >= 1.7.2 (untested with previous versions)
  */
 
-;(function($)
+(function($)
 {
     $.fn.extend({
         tao: function(options) {
@@ -27,12 +25,16 @@
     
                 $this.on('submit', function(e) {
                     e.preventDefault();
-                    params.data = {};
+                    params.data = params.data || {};
     
                     $this.find('input:not(:checkbox, :radio), input:checked, select, textarea').each(function() {
                         var $that = $(this);
                         params.data[$that.attr('name')] = $that.val();
                     });
+
+                    if (typeof params.submit === 'function') {
+                        params.submit();
+                    }
     
                     $.ajax(params);
                 });
